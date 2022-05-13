@@ -1,12 +1,20 @@
 //some constructor/factory to dynamically create project objects
 //todos go into projects kinda like folders?
-//should be a 'defualt/general' project where all unspecified todos go
-function project(name) {
-  array project //stores all project
+const projectFactory = (name) => {
+  let _projectArray = [];
+  _projectArray.push(name);
+  let _index = _projectArray.indexOf(name);
 
-  create //creates project, pushes to array
+  const getName = () => console.log(name);
+  const setName = (newName) => name = newName;
 
-  get //gets project name
-
-  delete //deletes project
+  const deleteProject = () => _projectArray.splice(_index, 1);
+  
+  return {
+    getName,
+    setName,
+    deleteProject
+  }
 }
+
+export {projectFactory};

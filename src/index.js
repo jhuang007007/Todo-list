@@ -1,12 +1,12 @@
 //import here
-import project from 'project.js'
-import todo from 'todo.js'
-import init from 'init.js'
+import {projectFactory} from './project.js';
+import {todoFactory} from './todo.js';
+// import {init} from './init.js';
 
 //initialize dom
-init()
+// init()
 
-
-
-
-
+const bruh = projectFactory('bruh');
+bruh.getName()
+bruh.deleteProject()
+bruh.getName()

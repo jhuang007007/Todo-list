@@ -1,21 +1,39 @@
 //some constructor/factory to dynamically create todo objects
-function todo(name, description, dueDate, priority = 'normal', notes = 
-null) {
-  array todo[general] //stores all todos with a default value of general
+const todoFactory = (name, description, dueDate, priority = 'normal', note = null, project = 'general') => {
+  let _todoArray = [];
+  _todoArray.push(name);
 
-  create //creates todo, pushes to array
+  const getName = () => name;
+  const getDescription = () => description;
+  const getDueDate = () => dueDate;
+  const getPriority = () => priority;
+  const getNote = () => note;
+  const getProject = () => project;
 
-  setName //changes name
+  const setName = (newName) => name = newName;
+  const setDescription = (newDescription) => description = newDescription;
+  const setDueDate = (newDueDate) => dueDate = newDueDate;
+  const setPriority = (newPriority) => priority = newPriority;
+  const setNote = (newNote) => note = newNote;
+  const setProject = (newProject) => project = newProject;
+
+  const deleteTodo = () => splice(_todoArray.indexOf(name), 1)
   
-  setDescription //changes description
-
-  setDueDate //changes due date
-
-  setPriority //changes priority
-
-  setNotes //changes notes
-
-  get //gets todo name
-
-  delete //deletes todo
+  return {
+    getName,
+    getDescription,
+    getDueDate,
+    getPriority,
+    getNote,
+    getProject,
+    setName,
+    setDescription,
+    setDueDate,
+    setPriority,
+    setNote,
+    setProject,
+    deleteTodo
+  }
 }
+
+export {todoFactory};
