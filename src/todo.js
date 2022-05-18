@@ -1,9 +1,20 @@
 //some constructor/factory to dynamically create todo objects
 const todoFactory = (name, description, dueDate, priority = 'normal', note = null, project = 'general') => {
-  let _todoArray = [];
-  _todoArray.push(name);
+  const todo = {};
+  todo.name = name;
+  todo.description = description;
+  todo.dueDate = dueDate;
+  todo.priority = priority;
+  todo.note = note;
+  todo.project = project;
 
-  const getName = () => name;
+  let _todoArray = [];
+  _todoArray.push(todo);
+  let _index = _todoArray.findIndex(td => td.name === name);
+  console.log(_index);
+  console.table(_todoArray);
+
+  const getName = () => console.log(name);
   const getDescription = () => description;
   const getDueDate = () => dueDate;
   const getPriority = () => priority;
@@ -17,7 +28,9 @@ const todoFactory = (name, description, dueDate, priority = 'normal', note = nul
   const setNote = (newNote) => note = newNote;
   const setProject = (newProject) => project = newProject;
 
-  const deleteTodo = () => splice(_todoArray.indexOf(name), 1)
+  const deleteTodo = () => {
+    _todoArray === -1 ? console.log('todo does not exist') : _todoArray.splice(_index, 1);
+  }
   
   return {
     getName,

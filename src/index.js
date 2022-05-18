@@ -1,12 +1,19 @@
 //import here
 import {projectFactory} from './project.js';
 import {todoFactory} from './todo.js';
-// import {init} from './init.js';
+import {closeSideBarEventListener, initialPageLoad, loadContent, loadHeader, loadSidebar, openSideBarEventListener} from './init.js';
+import './style.css';
 
 //initialize dom
-// init()
+initialPageLoad()
+loadHeader()
+loadSidebar()
+loadContent()
+openSideBarEventListener()
+closeSideBarEventListener()
 
-const bruh = projectFactory('bruh');
+const bruh = todoFactory('bruh', 'description', 'noduedate');
 bruh.getName()
-bruh.deleteProject()
+bruh.setName("bruhh")
 bruh.getName()
+bruh.deleteTodo("bruhh")

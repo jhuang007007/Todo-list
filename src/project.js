@@ -6,10 +6,14 @@ const projectFactory = (name) => {
   let _index = _projectArray.indexOf(name);
 
   const getName = () => console.log(name);
-  const setName = (newName) => name = newName;
 
-  const deleteProject = () => _projectArray.splice(_index, 1);
+  const setName = (newName) => {
+    name = newName;
+    _projectArray.splice(_index, 1, newName);
+  }
   
+  const deleteProject = () => _projectArray.splice(_index, 1); 
+
   return {
     getName,
     setName,
