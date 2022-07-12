@@ -43,3 +43,7 @@ li {
   background-color: blue;
   transition: margin-left .5s; 
 }
+
+.todo-container {
+  background-color: red;
+}

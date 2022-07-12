@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 const body = document.querySelector('body');
 
 const initialPageLoad = () => {
@@ -44,9 +46,11 @@ const loadHeader = () => {
 
 const loadSidebar = () => {
   const sidebar = document.createElement('div');
+  const projectLinkList = document.createElement('ul');
 
   sidebar.id = 'sidebar';
   body.appendChild(sidebar);
+  sidebar.appendChild(projectLinkList)
   const closeSideBarButton = document.createElement('img');
 
   closeSideBarButton.id = 'close-sidebar-button';
@@ -81,11 +85,88 @@ const closeSideBarEventListener = () => {
   document.querySelector('#close-sidebar-button').addEventListener('click', closeSideBar)
 }
 
+const loadTodoForm = () => {
+  const mainContent = document.querySelector('#main-content')
+  const todoForm = document.createElement('form')
+
+  todoForm.id = 'todo-form';
+  
+  const nameLabel = document.createElement('label')
+  nameLabel.setAttribute('for', 'name')
+  nameLabel.textContent = 'name'
+
+  const nameInput = document.createElement('input')
+  nameInput.setAttribute('type', 'text')
+  nameInput.setAttribute('name', 'name')
+  nameInput.id = 'name'
+
+  const descriptionLabel = document.createElement('label')
+  descriptionLabel.setAttribute('for', 'description')
+
+  const descriptionInput = document.createElement('input')
+  descriptionInput.setAttribute('type', 'text')
+  descriptionInput.setAttribute('name', 'description')
+  descriptionInput.id = 'description'
+
+  const dueDateLabel = document.createElement('label')
+  dueDateLabel.setAttribute('for', 'dueDate')
+
+  const dueDateInput = document.createElement('input')
+  dueDateInput.setAttribute('type', 'text')
+  dueDateInput.setAttribute('name', 'dueDate')
+  dueDateInput.id = 'dueDate'
+
+  const priorityLabel = document.createElement('label')
+  priorityLabel.setAttribute('for', 'priority')
+
+  const priorityInput = document.createElement('input')
+  priorityInput.setAttribute('type', 'text')
+  priorityInput.setAttribute('name', 'priority')
+  priorityInput.id = 'priority'
+
+  const noteLabel = document.createElement('label')
+  noteLabel.setAttribute('for', 'note')
+
+  const noteInput = document.createElement('input')
+  noteInput.setAttribute('type', 'text')
+  noteInput.setAttribute('name', 'note')
+  noteInput.id = 'note'
+
+  const projectLabel = document.createElement('label')
+  projectLabel.setAttribute('for', 'project')
+
+  const projectInput = document.createElement('input')
+  projectInput.setAttribute('type', 'text')
+  projectInput.setAttribute('name', 'project')
+  projectInput.id = 'project'
+
+  const submit = document.createElement('input')
+  submit.setAttribute('type', 'submit')
+  submit.setAttribute('value', 'Add todo')
+  
+  todoForm.appendChild(nameLabel)
+  todoForm.appendChild(nameInput)
+  todoForm.appendChild(descriptionLabel)
+  todoForm.appendChild(descriptionInput)
+  todoForm.appendChild(dueDateLabel)
+  todoForm.appendChild(dueDateInput)
+  todoForm.appendChild(priorityLabel)
+  todoForm.appendChild(priorityInput)
+  todoForm.appendChild(noteLabel)
+  todoForm.appendChild(noteInput)
+  todoForm.appendChild(projectLabel)
+  todoForm.appendChild(projectInput)
+  todoForm.appendChild(submit)
+
+  mainContent.appendChild(todoForm)
+}
+
 export {
   initialPageLoad,
   loadHeader,
   loadSidebar,
   loadContent,
   openSideBarEventListener,
-  closeSideBarEventListener
+  closeSideBarEventListener,
+  loadTodoForm
 }
