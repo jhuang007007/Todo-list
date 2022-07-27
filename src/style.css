@@ -1,10 +1,7 @@
+
 * {
   padding: 0;
   margin: 0;
-}
-
-header {
-  background-color: green;
 }
 
 nav > ul{
@@ -22,7 +19,7 @@ li {
   z-index: 1; 
   top: 0;
   left: 0;
-  background-color: rgb(255, 74, 74); 
+  background-color: #ff9f1c;
   overflow-x: hidden;
   padding-top: 60px;
   transition: 0.5s; 
@@ -35,12 +32,15 @@ li {
   margin-left: 50px;
 }
 
-/* #sidebar a {
-
-} */
+.project-list {
+  position: absolute;
+  top: 50px;
+  right: 150px;
+  margin-left: 50px;
+}
 
 #main {
-  background-color: blue;
+  background-color: #ffbf69;
   transition: margin-left .5s; 
 }
 

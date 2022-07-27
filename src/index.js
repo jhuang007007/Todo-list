@@ -5,7 +5,7 @@ import {closeSideBarEventListener, initialPageLoad, loadContent, loadHeader, loa
 from './init.js';
 import {createTodo} from './createTodo.js';
 import './style.css';
-//import { addProjectToDOM } from './addProject.js';
+import './custom.scss';
 
 //initialize dom
 initialPageLoad()
@@ -18,4 +18,3 @@ loadTodoForm()
 
 //functionality
 document.querySelector('#todo-form').addEventListener('submit', createTodo);
-

@@ -5,7 +5,7 @@ const todoArray = [];
 const createTodo = (event) => {
   event.preventDefault();
   //turn input into object
-  const todo = Array.from(document.querySelectorAll('#todo-form>input:not(:last-child)')).reduce((prev, input) => ({ ...prev, [input.id]: input.value }), {});
+  const todo = Array.from(document.querySelectorAll('#todo-form>.form-value')).reduce((prev, input) => ({ ...prev, [input.id]: input.value }), {});
 
   todoArray.push(todo)
 

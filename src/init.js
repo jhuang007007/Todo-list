@@ -7,7 +7,10 @@ const initialPageLoad = () => {
   main.id = 'main';
   body.appendChild(main);
 
-  main.textContent = 'main';
+  const title = document.createElement('h1');
+  title.textContent = 'Todo';
+
+  main.appendChild(title)
 }
 
 const loadHeader = () => {
@@ -47,10 +50,16 @@ const loadHeader = () => {
 const loadSidebar = () => {
   const sidebar = document.createElement('div');
   const projectLinkList = document.createElement('ul');
+  projectLinkList.classList.add('project-list')
+  const generalProjects = document.createElement('li');
+
+  generalProjects.textContent = 'General';
+  generalProjects.classList.add('project')
 
   sidebar.id = 'sidebar';
   body.appendChild(sidebar);
   sidebar.appendChild(projectLinkList)
+  projectLinkList.appendChild(generalProjects)
   const closeSideBarButton = document.createElement('img');
 
   closeSideBarButton.id = 'close-sidebar-button';
@@ -86,6 +95,8 @@ const closeSideBarEventListener = () => {
 }
 
 const loadTodoForm = () => {
+  const today = new Date();
+  const todayFormatted = format(today,'yyyy-MM-dd')
   const mainContent = document.querySelector('#main-content')
   const todoForm = document.createElement('form')
 
@@ -93,12 +104,14 @@ const loadTodoForm = () => {
   
   const nameLabel = document.createElement('label')
   nameLabel.setAttribute('for', 'name')
-  nameLabel.textContent = 'name'
 
   const nameInput = document.createElement('input')
   nameInput.setAttribute('type', 'text')
   nameInput.setAttribute('name', 'name')
+  nameInput.setAttribute('placeholder', 'Name of todo')
   nameInput.id = 'name'
+  nameInput.classList.add('form-value')
+  nameInput.required = true;
 
   const descriptionLabel = document.createElement('label')
   descriptionLabel.setAttribute('for', 'description')
@@ -106,23 +119,40 @@ const loadTodoForm = () => {
   const descriptionInput = document.createElement('input')
   descriptionInput.setAttribute('type', 'text')
   descriptionInput.setAttribute('name', 'description')
+  descriptionInput.setAttribute('placeholder', 'Description')
   descriptionInput.id = 'description'
+  descriptionInput.classList.add('form-value')
+  descriptionInput.required = true;
 
   const dueDateLabel = document.createElement('label')
   dueDateLabel.setAttribute('for', 'dueDate')
 
   const dueDateInput = document.createElement('input')
-  dueDateInput.setAttribute('type', 'text')
+  dueDateInput.setAttribute('type', 'date')
   dueDateInput.setAttribute('name', 'dueDate')
+  dueDateInput.setAttribute('value', todayFormatted)
+  dueDateInput.setAttribute('min', todayFormatted)
   dueDateInput.id = 'dueDate'
+  dueDateInput.classList.add('form-value')
+  dueDateInput.required = true;
 
-  const priorityLabel = document.createElement('label')
-  priorityLabel.setAttribute('for', 'priority')
+  const priorityList = document.createElement('select')
+  priorityList.id = 'priority'
+  priorityList.classList.add('form-value')
 
-  const priorityInput = document.createElement('input')
-  priorityInput.setAttribute('type', 'text')
-  priorityInput.setAttribute('name', 'priority')
-  priorityInput.id = 'priority'
+  const priorityLow = document.createElement('option')
+  priorityLow.textContent = 'Low';
+  priorityLow.setAttribute('value', 'Low')
+  const priorityMedium = document.createElement('option')
+  priorityMedium.textContent = 'Medium';
+  priorityMedium.setAttribute('value', 'Medium')
+  const priorityHigh = document.createElement('option')
+  priorityHigh.textContent = 'High';
+  priorityHigh.setAttribute('value', 'High')
+
+  priorityList.appendChild(priorityLow)
+  priorityList.appendChild(priorityMedium)
+  priorityList.appendChild(priorityHigh)
 
   const noteLabel = document.createElement('label')
   noteLabel.setAttribute('for', 'note')
@@ -130,15 +160,19 @@ const loadTodoForm = () => {
   const noteInput = document.createElement('input')
   noteInput.setAttribute('type', 'text')
   noteInput.setAttribute('name', 'note')
+  noteInput.setAttribute('placeholder', 'Add a note here...')
   noteInput.id = 'note'
+  noteInput.classList.add('form-value')
 
   const projectLabel = document.createElement('label')
   projectLabel.setAttribute('for', 'project')
 
-  const projectInput = document.createElement('input')
-  projectInput.setAttribute('type', 'text')
-  projectInput.setAttribute('name', 'project')
-  projectInput.id = 'project'
+  // const projectInput = document.createElement('input')
+  // projectInput.setAttribute('type', 'text')
+  // projectInput.setAttribute('name', 'project')
+  // projectInput.setAttribute('value', 'General')
+  // projectInput.id = 'project'
+  // projectInput.classList.add('form-value')
 
   const submit = document.createElement('input')
   submit.setAttribute('type', 'submit')
@@ -150,12 +184,11 @@ const loadTodoForm = () => {
   todoForm.appendChild(descriptionInput)
   todoForm.appendChild(dueDateLabel)
   todoForm.appendChild(dueDateInput)
-  todoForm.appendChild(priorityLabel)
-  todoForm.appendChild(priorityInput)
+  todoForm.appendChild(priorityList)
   todoForm.appendChild(noteLabel)
   todoForm.appendChild(noteInput)
   todoForm.appendChild(projectLabel)
-  todoForm.appendChild(projectInput)
+  // todoForm.appendChild(projectInput)
   todoForm.appendChild(submit)
 
   mainContent.appendChild(todoForm)
