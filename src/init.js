@@ -50,16 +50,25 @@ const loadHeader = () => {
 const loadSidebar = () => {
   const sidebar = document.createElement('div');
   const projectLinkList = document.createElement('ul');
-  projectLinkList.classList.add('project-list')
-  const generalProjects = document.createElement('li');
+  projectLinkList.classList.add('project-list');
+  const projectContainer = document.createElement('li');
+  const generalProjects = document.createElement('p');
+  const newProjectForm = document.createElement('form')
+  newProjectForm.id = 'project-form'
+  const createNewProject = document.createElement('input');
+  createNewProject.setAttribute('type', 'text');
+  createNewProject.id = 'create-project';
 
-  generalProjects.textContent = 'General';
-  generalProjects.classList.add('project')
+  generalProjects.textContent = 'General'
+  projectContainer.classList.add('project')
 
   sidebar.id = 'sidebar';
   body.appendChild(sidebar);
   sidebar.appendChild(projectLinkList)
-  projectLinkList.appendChild(generalProjects)
+  projectLinkList.appendChild(newProjectForm)
+  projectLinkList.appendChild(projectContainer)
+  newProjectForm.appendChild(createNewProject)
+  projectContainer.appendChild(generalProjects)
   const closeSideBarButton = document.createElement('img');
 
   closeSideBarButton.id = 'close-sidebar-button';

@@ -1,4 +1,3 @@
-import {todoFactory} from './todo.js';
 //read user input, create todo, push to array
 const todoArray = [];
 
@@ -31,4 +30,4 @@ const renderTodo = (todo) => {
   document.querySelector('#main-content').appendChild(todoContainer)
 }
 
-export {createTodo}
+export {createTodo, todoArray}
