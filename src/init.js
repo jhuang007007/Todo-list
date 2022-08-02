@@ -47,28 +47,29 @@ const loadHeader = () => {
   searchBarImage.src = '../src/img/search.svg';
 }
 
+
 const loadSidebar = () => {
   const sidebar = document.createElement('div');
   const projectLinkList = document.createElement('ul');
   projectLinkList.classList.add('project-list');
   const projectContainer = document.createElement('li');
   const generalProjects = document.createElement('p');
-  const newProjectForm = document.createElement('form')
-  newProjectForm.id = 'project-form'
-  const createNewProject = document.createElement('input');
-  createNewProject.setAttribute('type', 'text');
-  createNewProject.id = 'create-project';
+  
+  //show create new project input form and hide create new project button
+  const createNewProjectButton = document.createElement('button');
+  createNewProjectButton.textContent = 'Create new project';
+  createNewProjectButton.id = 'create-project-button';
 
-  generalProjects.textContent = 'General'
-  projectContainer.classList.add('project')
+  generalProjects.textContent = 'General';
+  projectContainer.classList.add('project');
 
   sidebar.id = 'sidebar';
   body.appendChild(sidebar);
   sidebar.appendChild(projectLinkList)
-  projectLinkList.appendChild(newProjectForm)
   projectLinkList.appendChild(projectContainer)
-  newProjectForm.appendChild(createNewProject)
+  projectLinkList.appendChild(createNewProjectButton)
   projectContainer.appendChild(generalProjects)
+  
   const closeSideBarButton = document.createElement('img');
 
   closeSideBarButton.id = 'close-sidebar-button';
@@ -83,6 +84,19 @@ const loadContent = () => {
 
   mainContent.id = 'main-content';
   main.appendChild(mainContent);
+}
+
+const loadNewProjectForm = () => {
+  const projectLinkList = document.querySelector('.project-list')
+  const newProjectForm = document.createElement('form');
+  newProjectForm.id = 'project-form';
+  const createNewProject = document.createElement('input');createNewProject.setAttribute('type', 'text');
+  createNewProject.id = 'create-project';
+  projectLinkList.appendChild(newProjectForm)
+  newProjectForm.appendChild(createNewProject)
+  
+  //hide create project button
+  document.querySelector('#create-project-button').remove();
 }
 
 const openSideBar = () => {
@@ -207,6 +221,7 @@ export {
   initialPageLoad,
   loadHeader,
   loadSidebar,
+  loadNewProjectForm,
   loadContent,
   openSideBarEventListener,
   closeSideBarEventListener,

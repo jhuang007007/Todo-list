@@ -36,7 +36,12 @@ li {
   position: absolute;
   top: 50px;
   right: -25px;
-  margin-left: 50px;
+  left: 0;
+  margin-left: 0px;
+}
+
+#create-project {
+  width:75%;
 }
 
 #main {
@@ -46,4 +51,8 @@ li {
 
 .todo-container {
   background-color: red;
+}
+
+.hidden {
+  display:none;
 }
