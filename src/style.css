@@ -56,3 +56,8 @@ li {
 .hidden {
   display:none;
 }
+
+#create-project-button {
+  border: none;
+  background-color: transparent;
+}

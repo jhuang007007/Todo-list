@@ -1,3 +1,5 @@
+import { loadTodoForm } from "./init";
+
 //read user input, create todo, push to array
 const todoArray = [];
 
@@ -10,6 +12,9 @@ const createTodo = (event) => {
 
   //saveTodo(todo)
   renderTodo(todo)
+
+  //hide form
+  
 }
 
 // const saveTodo = () => {

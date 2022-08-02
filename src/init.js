@@ -217,6 +217,16 @@ const loadTodoForm = () => {
   mainContent.appendChild(todoForm)
 }
 
+const loadTodoButton = () => {
+  const todoButton = document.createElement('button')
+  todoButton.textContent = 'Create new todo'
+  const mainContent = document.querySelector('#main-content')
+
+  mainContent.appendChild(todoButton)
+
+  todoButton.addEventListener('click', loadTodoForm)
+}
+
 export {
   initialPageLoad,
   loadHeader,
@@ -225,5 +235,6 @@ export {
   loadContent,
   openSideBarEventListener,
   closeSideBarEventListener,
-  loadTodoForm
+  loadTodoForm,
+  loadTodoButton
 }
