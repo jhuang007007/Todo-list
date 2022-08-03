@@ -1,4 +1,6 @@
 import { format } from "date-fns";
+import { createTodo } from "./createTodo";
+import { projectArray } from "./projectFactory";
 
 const body = document.querySelector('body');
 
@@ -52,23 +54,14 @@ const loadSidebar = () => {
   const sidebar = document.createElement('div');
   const projectLinkList = document.createElement('ul');
   projectLinkList.classList.add('project-list');
-  const projectContainer = document.createElement('li');
-  const generalProjects = document.createElement('p');
-  
-  //show create new project input form and hide create new project button
-  const createNewProjectButton = document.createElement('button');
-  createNewProjectButton.textContent = 'Create new project';
-  createNewProjectButton.id = 'create-project-button';
 
-  generalProjects.textContent = 'General';
+  const projectContainer = document.createElement('li');
   projectContainer.classList.add('project');
 
   sidebar.id = 'sidebar';
   body.appendChild(sidebar);
   sidebar.appendChild(projectLinkList)
   projectLinkList.appendChild(projectContainer)
-  projectLinkList.appendChild(createNewProjectButton)
-  projectContainer.appendChild(generalProjects)
   
   const closeSideBarButton = document.createElement('img');
 
@@ -76,6 +69,14 @@ const loadSidebar = () => {
   closeSideBarButton.src = '../src/img/x-lg.svg';
 
   sidebar.appendChild(closeSideBarButton)
+}
+
+const loadNewProjectButton = () => {
+  const createNewProjectButton = document.createElement('button');
+  createNewProjectButton.textContent = 'Create new project';
+  createNewProjectButton.id = 'create-project-button';
+  const projectLinkList = document.querySelector('.project-list')
+  projectLinkList.appendChild(createNewProjectButton)
 }
 
 const loadContent = () => {
@@ -190,16 +191,21 @@ const loadTodoForm = () => {
   const projectLabel = document.createElement('label')
   projectLabel.setAttribute('for', 'project')
 
-  // const projectInput = document.createElement('input')
-  // projectInput.setAttribute('type', 'text')
-  // projectInput.setAttribute('name', 'project')
-  // projectInput.setAttribute('value', 'General')
-  // projectInput.id = 'project'
-  // projectInput.classList.add('form-value')
+  const projectList = document.createElement('select')
+  projectList.id = 'project'
+  projectList.classList.add('form-value')
 
-  const submit = document.createElement('input')
+  //iterate through projectArray to render all project names into DOM in sidebar
+  for (let i = 0; i < projectArray.length; i++) {
+    const projectOption = document.createElement('option')
+    projectOption.textContent = projectArray[i].name;
+    projectOption.setAttribute('value', projectArray[i].name);
+    projectList.appendChild(projectOption)
+  }
+
+  const submit = document.createElement('button')
   submit.setAttribute('type', 'submit')
-  submit.setAttribute('value', 'Add todo')
+  submit.textContent = 'submit'
   
   todoForm.appendChild(nameLabel)
   todoForm.appendChild(nameInput)
@@ -211,7 +217,7 @@ const loadTodoForm = () => {
   todoForm.appendChild(noteLabel)
   todoForm.appendChild(noteInput)
   todoForm.appendChild(projectLabel)
-  // todoForm.appendChild(projectInput)
+  todoForm.appendChild(projectList)
   todoForm.appendChild(submit)
 
   mainContent.appendChild(todoForm)
@@ -224,7 +230,19 @@ const loadTodoButton = () => {
 
   mainContent.appendChild(todoButton)
 
-  todoButton.addEventListener('click', loadTodoForm)
+  todoButton.addEventListener('click', () => {
+    loadTodoForm()
+    document.querySelector('#todo-form').addEventListener('submit', createTodo)
+    todoButton.remove()
+  });
+}
+
+const removeMainContentChildren = () => {
+  const mainContent = document.querySelector('#main-content');
+  while (mainContent.lastElementChild) {
+    console.log(mainContent.lastElementChild)
+    mainContent.removeChild(mainContent.lastElementChild);
+  }
 }
 
 export {
@@ -236,5 +254,7 @@ export {
   openSideBarEventListener,
   closeSideBarEventListener,
   loadTodoForm,
-  loadTodoButton
+  loadTodoButton,
+  loadNewProjectButton,
+  removeMainContentChildren
 }

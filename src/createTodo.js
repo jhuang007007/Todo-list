@@ -1,4 +1,4 @@
-import { loadTodoForm } from "./init";
+import { loadTodoButton } from "./init";
 
 //read user input, create todo, push to array
 const todoArray = [];
@@ -14,7 +14,8 @@ const createTodo = (event) => {
   renderTodo(todo)
 
   //hide form
-  
+  document.querySelector('#todo-form').remove()
+  loadTodoButton();
 }
 
 // const saveTodo = () => {
@@ -27,12 +28,10 @@ const renderTodo = (todo) => {
   const todoValues = Object.values(todo)
   for (let i = 0; i < todoValues.length; i++) {
     const todoValue = document.createElement('p')
-    console.log(todoValues)
     todoValue.textContent = todoValues[i];
-    console.log(todoValues[i])
     todoContainer.appendChild(todoValue)
   }
   document.querySelector('#main-content').appendChild(todoContainer)
 }
 
-export {createTodo, todoArray}
+export {createTodo, renderTodo, todoArray}

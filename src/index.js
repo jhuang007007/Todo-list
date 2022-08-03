@@ -1,10 +1,10 @@
 //import here
-import {closeSideBarEventListener, initialPageLoad, loadContent, loadHeader, loadSidebar, openSideBarEventListener, loadTodoForm, loadNewProjectForm, loadTodoButton} from './init.js';
-import {createTodo} from './createTodo.js';
+import {closeSideBarEventListener, initialPageLoad, loadContent, loadHeader, loadSidebar, openSideBarEventListener, loadTodoButton, loadNewProjectButton} from './init.js';
 import './style.css';
 import './custom.scss';
-import {createProject} from './createProject.js';
+import { renderProject} from './createProject.js';
 import { projectButtonEventHandler } from './createProjectButton.js';
+import { projectFactory } from './projectFactory.js';
 
 //initialize dom
 initialPageLoad()
@@ -13,9 +13,9 @@ loadSidebar()
 loadContent()
 openSideBarEventListener()
 closeSideBarEventListener()
-loadTodoForm()
 loadTodoButton()
+renderProject(projectFactory('General'))
+loadNewProjectButton();
 
 //functionality
-document.querySelector('#todo-form').addEventListener('submit', createTodo);
 projectButtonEventHandler();
