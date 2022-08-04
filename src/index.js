@@ -1,5 +1,5 @@
 //import here
-import {closeSideBarEventListener, initialPageLoad, loadContent, loadHeader, loadSidebar, openSideBarEventListener, loadTodoButton, loadNewProjectButton} from './init.js';
+import {closeSideBarEventListener, initialPageLoad, loadContent, loadHeader, loadSidebar, openSideBarEventListener, loadTodoButton, loadNewProjectButton, loadAllTodos} from './init.js';
 import './style.css';
 import './custom.scss';
 import { renderProject} from './createProject.js';
@@ -16,6 +16,7 @@ closeSideBarEventListener()
 loadTodoButton()
 renderProject(projectFactory('General'))
 loadNewProjectButton();
+loadAllTodos();
 
 //functionality
 projectButtonEventHandler();

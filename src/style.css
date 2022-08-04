@@ -61,3 +61,22 @@ li {
   border: none;
   background-color: transparent;
 }
+
+.project-container > p:hover {
+  cursor: pointer;
+  color: antiquewhite;
+}
+
+.project-container > p:active {
+  color: rgb(141, 128, 112);
+}
+
+#create-project-button:hover {
+  border: none;
+  background-color: transparent;
+  color: antiquewhite;
+}
+
+#create-project-button:active {
+  color: rgb(141, 128, 112);
+}

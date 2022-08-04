@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { createTodo } from "./createTodo";
+import { createTodo, renderTodo, todoArray } from "./createTodo";
 import { projectArray } from "./projectFactory";
 
 const body = document.querySelector('body');
@@ -49,11 +49,20 @@ const loadHeader = () => {
   searchBarImage.src = '../src/img/search.svg';
 }
 
-
 const loadSidebar = () => {
   const sidebar = document.createElement('div');
   const projectLinkList = document.createElement('ul');
   projectLinkList.classList.add('project-list');
+
+  //all todos tab
+  //loads all todos on click
+  const allTodos = document.createElement('div')
+  allTodos.classList.add('project-container')
+  const allTodosLink = document.createElement('p')
+  allTodosLink.textContent = 'All todos'
+  allTodosLink.addEventListener('click', loadAllTodos)
+  projectLinkList.appendChild(allTodos)
+  allTodos.appendChild(allTodosLink)
 
   const projectContainer = document.createElement('li');
   projectContainer.classList.add('project');
@@ -69,6 +78,15 @@ const loadSidebar = () => {
   closeSideBarButton.src = '../src/img/x-lg.svg';
 
   sidebar.appendChild(closeSideBarButton)
+}
+
+//load all todos (not filtered based on project)
+const loadAllTodos = () => {
+  removeMainContentChildren()
+  todoArray.forEach(todo => {
+    renderTodo(todo);
+  });
+  loadTodoButton()
 }
 
 const loadNewProjectButton = () => {
@@ -256,5 +274,6 @@ export {
   loadTodoForm,
   loadTodoButton,
   loadNewProjectButton,
-  removeMainContentChildren
+  removeMainContentChildren,
+  loadAllTodos
 }
