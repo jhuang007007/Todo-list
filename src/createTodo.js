@@ -1,3 +1,4 @@
+import { filterProject } from "./createProject";
 import { loadTodoButton } from "./init";
 
 //read user input, create todo, push to array
@@ -10,12 +11,14 @@ const createTodo = (event) => {
 
   todoArray.push(todo)
 
-  //saveTodo(todo)
   renderTodo(todo)
 
   //hide form
   document.querySelector('#todo-form').remove()
   loadTodoButton();
+  
+  //show todos with same project value
+  filterProject(todo.project);
 }
 
 // const saveTodo = () => {
