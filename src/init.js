@@ -216,8 +216,8 @@ const loadTodoForm = () => {
   //iterate through projectArray to render all project names into DOM in sidebar
   for (let i = 0; i < projectArray.length; i++) {
     const projectOption = document.createElement('option')
-    projectOption.textContent = projectArray[i].name;
-    projectOption.setAttribute('value', projectArray[i].name);
+    projectOption.textContent = projectArray[i].getName();
+    projectOption.setAttribute('value', projectArray[i].getName());
     projectList.appendChild(projectOption)
   }
 
@@ -258,7 +258,6 @@ const loadTodoButton = () => {
 const removeMainContentChildren = () => {
   const mainContent = document.querySelector('#main-content');
   while (mainContent.lastElementChild) {
-    console.log(mainContent.lastElementChild)
     mainContent.removeChild(mainContent.lastElementChild);
   }
 }

@@ -8,8 +8,8 @@ const createProject = (event) => {
   const projectName = document.querySelector('#create-project').value;
   const project = projectFactory(projectName)
   projectArray.push(project)
-
-  console.log(projectArray)
+  console.log(project)
+  console.table(projectArray)
 
   //saveProject
   renderProject(project)
@@ -27,17 +27,28 @@ const createProject = (event) => {
 const renderProject = (project) => {
   const projectContainer = document.createElement('div')
   projectContainer.classList.add('project-container')
-  const projectValues = Object.values(project)
-  for (let i = 0; i < projectValues.length; i++) {
-    const projectValue = document.createElement('p')
-    projectValue.textContent = projectValues[i];
-    //on click, filter tasks to project related tasks
-    projectValue.addEventListener('click', () => {
-      filterProject(projectValues[i])
-    });
-    projectContainer.appendChild(projectValue)
+  const projectName = project.getName()
+  const projectValue = document.createElement('p')
+  projectValue.textContent = projectName;
+  projectValue.addEventListener('click', () => {
+    filterProject(projectName)
+  });
+  projectContainer.appendChild(projectValue)
+
+  //delete button
+  if (projectName !== 'General') {
+    const deleteProjectButton = document.createElement('img');
+    deleteProjectButton.classList.add('delete-project-button')
+    deleteProjectButton.src = '../src/img/x-lg.svg'
+    deleteProjectButton.addEventListener('click', () => {
+      projectContainer.remove();
+      project.deleteProject();
+    })
+    projectContainer.appendChild(deleteProjectButton)
   }
-  document.querySelector('.project-list').appendChild(projectContainer) 
+  
+  
+  document.querySelector('.project-list').appendChild(projectContainer)
 }
 
 const filterProject = (projectName) => {
