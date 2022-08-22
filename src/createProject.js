@@ -8,13 +8,15 @@ const createProject = (event) => {
   const projectName = document.querySelector('#create-project').value;
   const project = projectFactory(projectName)
   projectArray.push(project)
-  console.log(project)
-  console.table(projectArray)
 
   //saveProject
   renderProject(project)
 
-  //remove form from dom and create a new 'create project button'
+  //remove form and create a new 'create project button'
+  reloadCreateProjectButton();
+}
+
+const reloadCreateProjectButton = () => {
   document.querySelector('#project-form').remove();
   const projectLinkList = document.querySelector('.project-list')
   const createNewProjectButton = document.createElement('button');
@@ -53,15 +55,12 @@ const renderProject = (project) => {
 
 const filterProject = (projectName) => {
   removeMainContentChildren();
-  console.log(todoArray)
   todoArray.forEach(todo => {
-    if (todo.project === projectName) {
-      console.log(todo.project)
-      console.log(projectName)
+    if (todo.getProject() === projectName) {
       renderTodo(todo);
     }
   });
   loadTodoButton();
 }
 
-export {createProject, renderProject, filterProject}
+export {createProject, renderProject, filterProject, reloadCreateProjectButton}
