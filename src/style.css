@@ -97,3 +97,8 @@ li {
 #create-project-button:active {
   color: rgb(141, 128, 112);
 }
+
+.create-project-exists-error {
+  border: 1px solid red;
+  outline: none;
+}

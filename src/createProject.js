@@ -5,15 +5,33 @@ import { projectFactory, projectArray } from "./projectFactory";
 
 const createProject = (event) => {
   event.preventDefault();
-  const projectName = document.querySelector('#create-project').value;
-  const project = projectFactory(projectName)
-  projectArray.push(project)
+  const createProjectInput = document.querySelector('#create-project')
+  const projectName = createProjectInput.value;
 
-  //saveProject
-  renderProject(project)
-
-  //remove form and create a new 'create project button'
-  reloadCreateProjectButton();
+  //prevent duplicate names
+  const projectArrayLength = projectArray.length;
+  const projectNameArray = []
+  for (let i = 0; i < projectArrayLength; i++) {
+    projectNameArray.push(projectArray[i].getName())
+  }
+  let projectNameExists = false;
+  if (projectNameArray.indexOf(projectName) !== -1) {
+    projectNameExists = true;
+  }
+  if (projectNameExists === false) {
+    createProjectInput.classList.remove('create-project-exists-error')
+    const project = projectFactory(projectName)
+    projectArray.push(project)
+  
+    //renderProject
+    renderProject(project)
+  
+    //remove form and create a new 'create project button'
+    reloadCreateProjectButton();
+  } else {
+    console.log('Project names must be unique')
+    createProjectInput.classList.add('create-project-exists-error')
+  }
 }
 
 const reloadCreateProjectButton = () => {
