@@ -1,14 +1,17 @@
 import { filterProject } from "./createProject";
 import { loadTodoButton } from "./init";
-import { todoFactory } from "./todoFactory";
+import { loadfromLocalStorage, saveToLocalStorage } from "./localStorageHandler";
+import { retrieveTodosFromLocalStorage, todoFactory } from "./todoFactory";
 
-//read user input, create todo, push to array
-const todoArray = [];
+let todoArray = [];
+if (loadfromLocalStorage('TODO_NAMES') !== null) {
+  todoArray = retrieveTodosFromLocalStorage();
+}
 
 const createTodo = (event) => {
   event.preventDefault();
+
   //turn input into object
-  // const todo = Array.from(document.querySelectorAll('#todo-form>.form-value')).reduce((prev, input) => ({ ...prev, [input.id]: input.value }), {});
   const name = document.querySelector('#name').value;
   const description = document.querySelector('#description').value;
   const dueDate = document.querySelector('#dueDate').value;
@@ -18,8 +21,22 @@ const createTodo = (event) => {
 
   const todo = todoFactory(name, description, dueDate, priority, note, project)
   
+  //save todos
   todoArray.push(todo)
+  const todoNamesArray = todoArray.map(td => td.getName())
+  const todoDescriptionsArray = todoArray.map(td => td.getDescription())
+  const todoDueDatesArray = todoArray.map(td => td.getDueDate())
+  const todoPrioritiesArray = todoArray.map(td => td.getPriority())
+  const todoNotesArray = todoArray.map(td => td.getNote())
+  const todoProjectsArray = todoArray.map(td => td.getProject())
+  saveToLocalStorage('TODO_NAMES', todoNamesArray)
+  saveToLocalStorage('TODO_DESCRIPTIONS', todoDescriptionsArray)
+  saveToLocalStorage('TODO_DUEDATES', todoDueDatesArray)
+  saveToLocalStorage('TODO_PRIORITIES', todoPrioritiesArray)
+  saveToLocalStorage('TODO_NOTES', todoNotesArray)
+  saveToLocalStorage('TODO_PROJECTS', todoProjectsArray)
 
+  //render todos
   renderTodo(todo)
 
   //hide form
@@ -30,17 +47,15 @@ const createTodo = (event) => {
   filterProject(todo.getProject());
 }
 
-// const saveTodo = () => {
-  
-// }
-
 const renderTodo = (todo) => {
+  console.table(todoArray.map(td => td.getName()))
   const todoContainer = document.createElement('div')
   todoContainer.classList.add('todo-container')
+  const todoName = todo.getName();
 
   //todo values
   const name = document.createElement('p');
-  name.textContent = todo.getName();
+  name.textContent = todoName;
   const description = document.createElement('p');
   description.textContent = todo.getDescription();
   const dueDate = document.createElement('p');
@@ -64,7 +79,8 @@ const renderTodo = (todo) => {
   deleteTodoButton.src = '../src/img/x-lg.svg'
   deleteTodoButton.addEventListener('click', () => {
     todoContainer.remove();
-    project.deleteTodo();
+    todo.deleteTodo();
+    todoArray.splice(todoArray.findIndex(td => td.getName() === todoName), 1)
   })
   todoContainer.appendChild(deleteTodoButton)
 
