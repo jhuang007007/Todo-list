@@ -1,12 +1,14 @@
 import { projectButtonEventHandler } from "./createProjectButton";
 import { renderTodo, todoArray } from "./createTodo";
 import { loadTodoButton, removeMainContentChildren } from "./init";
+import { loadfromLocalStorage, saveToLocalStorage } from "./localStorageHandler";
 import { projectFactory, projectArray } from "./projectFactory";
 
 const createProject = (event) => {
   event.preventDefault();
   const createProjectInput = document.querySelector('#create-project')
   const projectName = createProjectInput.value;
+  console.log(projectName)
 
   //prevent duplicate names
   const projectArrayLength = projectArray.length;
@@ -21,8 +23,13 @@ const createProject = (event) => {
   if (projectNameExists === false) {
     createProjectInput.classList.remove('create-project-exists-error')
     const project = projectFactory(projectName)
+    console.log(project.getName())
     projectArray.push(project)
-  
+    projectNameArray.push(projectName)
+    
+    //save projects to local storage
+    saveToLocalStorage('PROJECTS', projectNameArray)
+
     //renderProject
     renderProject(project)
   
@@ -66,9 +73,14 @@ const renderProject = (project) => {
     })
     projectContainer.appendChild(deleteProjectButton)
   }
-  
-  
   document.querySelector('.project-list').appendChild(projectContainer)
+}
+
+const renderAllProjects = () => {
+  const projectArrayLength = projectArray.length;
+  for (let i = 0; i < projectArrayLength; i++) {
+    renderProject(projectArray[i])
+  }
 }
 
 const filterProject = (projectName) => {
@@ -81,4 +93,4 @@ const filterProject = (projectName) => {
   loadTodoButton();
 }
 
-export {createProject, renderProject, filterProject, reloadCreateProjectButton}
+export {createProject, renderProject, filterProject, reloadCreateProjectButton, renderAllProjects}

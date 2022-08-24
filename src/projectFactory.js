@@ -1,36 +1,44 @@
-//some constructor/factory to dynamically create project objects
-//todos go into projects kinda like folders
-const projectArray = [];
+import { loadfromLocalStorage, saveToLocalStorage } from "./localStorageHandler";
 
-// const projectFactory = (name) => {
-//   const index = projectArray.findIndex(proj => proj.name === name);
-//   return {
-//     name,
-//     deleteProject() {
-//       projectArray.splice(index, 1)
-//     }
-//   }
-// }
+let projectArray = loadfromLocalStorage('PROJECTS');
+if (projectArray === null) {
+  projectArray = []
+}
 
 const projectFactory = (name) => {
   const index = projectArray.findIndex(proj => proj.name === name);
   const project = {};
   project.name = name;
+  const getName = () => name;
   const deleteProject = () => {
     projectArray.splice(index, 1)
+    const projectNameArray = projectArray.map(proj => proj.getName())
+    saveToLocalStorage('PROJECTS', projectNameArray)
   }
-  const getName = () => name;
   return {
     deleteProject,
     getName
   }
 }
 
-const general = projectFactory('General')
-projectArray.push(general)
+const addFunctionsBackToProjects = () => {
+  let newProjectArray = []
+  for (let i = 0; i < projectArray.length; i++) {
+    newProjectArray.push(projectFactory(projectArray[i]))
+  }
+  return newProjectArray
+}
+
+if (projectArray.length === 0) {
+  const general = projectFactory('General')
+  projectArray.push(general)
+} else {
+  projectArray = addFunctionsBackToProjects();
+}
 
 export {
   projectFactory,
-  projectArray
+  projectArray,
+  addFunctionsBackToProjects
 }
 
