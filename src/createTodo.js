@@ -67,11 +67,11 @@ const renderTodo = (todo) => {
   const project = document.createElement('p');
   project.textContent = todo.getProject();
   todoContainer.appendChild(name)
-  todoContainer.appendChild(description)
-  todoContainer.appendChild(dueDate)
-  todoContainer.appendChild(priority)
-  todoContainer.appendChild(note)
-  todoContainer.appendChild(project)
+  // todoContainer.appendChild(description)
+  // todoContainer.appendChild(dueDate)
+  // todoContainer.appendChild(priority)
+  // todoContainer.appendChild(note)
+  // todoContainer.appendChild(project)
 
   //delete button
   const deleteTodoButton = document.createElement('img');
@@ -83,6 +83,37 @@ const renderTodo = (todo) => {
     todoArray.splice(todoArray.findIndex(td => td.getName() === todoName), 1)
   })
   todoContainer.appendChild(deleteTodoButton)
+
+  //expand button
+  const expandTodoButton = document.createElement('img');
+  expandTodoButton.classList.add('expand-todo-button')
+  expandTodoButton.src = '../src/img/chevron-down.svg'
+  expandTodoButton.addEventListener('click', () => {
+    todoContainer.appendChild(description)
+    todoContainer.appendChild(dueDate)
+    todoContainer.appendChild(priority)
+    todoContainer.appendChild(note)
+    todoContainer.appendChild(project)
+    expandTodoButton.remove()
+    todoContainer.appendChild(collapseTodoButton)
+  })
+  todoContainer.appendChild(expandTodoButton)
+
+  document.querySelector('#main-content').appendChild(todoContainer)
+
+  //collapse button
+  const collapseTodoButton = document.createElement('img');
+  collapseTodoButton.classList.add('collapse-todo-button')
+  collapseTodoButton.src = '../src/img/chevron-up.svg'
+  collapseTodoButton.addEventListener('click', () => {
+    description.remove()
+    dueDate.remove()
+    priority.remove()
+    note.remove()
+    project.remove()
+    collapseTodoButton.remove()
+    todoContainer.appendChild(expandTodoButton)
+  })
 
   document.querySelector('#main-content').appendChild(todoContainer)
 }

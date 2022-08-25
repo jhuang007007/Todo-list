@@ -50,7 +50,7 @@ li {
 }
 
 .todo-container {
-  background-color: red;
+  background-color: #ffe9cd;
 }
 
 .hidden {
@@ -102,3 +102,29 @@ li {
   border: 1px solid red;
   outline: none;
 }
+
+.todo-container {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: auto;
+  border-bottom: solid #f5b562 1px;
+}
+
+.todo-container > :nth-child(1) {
+  margin-bottom: 5px;
+}
+
+.delete-todo-button {
+  grid-column: 9;
+}
+
+.expand-todo-button {
+  grid-row: 1;
+  grid-column: 8;
+}
+
+.collapse-todo-button {
+  grid-row: 1;
+  grid-column: 8;
+}
+
