@@ -19,7 +19,7 @@ const createTodo = (event) => {
   const note = document.querySelector('#note').value;
   const project = document.querySelector('#project').value;
 
-  const todo = todoFactory(name, description, dueDate, priority, note, project)
+  const todo = todoFactory(name, description, dueDate, priority, note, project, false)
   
   //save todos
   todoArray.push(todo)
@@ -29,12 +29,14 @@ const createTodo = (event) => {
   const todoPrioritiesArray = todoArray.map(td => td.getPriority())
   const todoNotesArray = todoArray.map(td => td.getNote())
   const todoProjectsArray = todoArray.map(td => td.getProject())
+  const todoCompletedArray = todoArray.map(td => td.getCompleted())
   saveToLocalStorage('TODO_NAMES', todoNamesArray)
   saveToLocalStorage('TODO_DESCRIPTIONS', todoDescriptionsArray)
   saveToLocalStorage('TODO_DUEDATES', todoDueDatesArray)
   saveToLocalStorage('TODO_PRIORITIES', todoPrioritiesArray)
   saveToLocalStorage('TODO_NOTES', todoNotesArray)
   saveToLocalStorage('TODO_PROJECTS', todoProjectsArray)
+  saveToLocalStorage('TODO_COMPLETED', todoCompletedArray)
 
   //render todos
   renderTodo(todo)
@@ -54,24 +56,40 @@ const renderTodo = (todo) => {
   const todoName = todo.getName();
 
   //todo values
-  const name = document.createElement('p');
+  const name = document.createElement('p')
   name.textContent = todoName;
-  const description = document.createElement('p');
-  description.textContent = todo.getDescription();
-  const dueDate = document.createElement('p');
-  dueDate.textContent = todo.getDueDate();
-  const priority = document.createElement('p');
-  priority.textContent = todo.getPriority();
-  const note = document.createElement('p');
-  note.textContent = todo.getNote();
-  const project = document.createElement('p');
-  project.textContent = todo.getProject();
+  const description = document.createElement('p')
+  description.textContent = todo.getDescription()
+  const dueDate = document.createElement('p')
+  dueDate.textContent = todo.getDueDate()
+  const priority = document.createElement('p')
+  priority.textContent = todo.getPriority()
+  const note = document.createElement('p')
+  note.textContent = todo.getNote()
+  const project = document.createElement('p')
+  project.textContent = todo.getProject()
   todoContainer.appendChild(name)
-  // todoContainer.appendChild(description)
-  // todoContainer.appendChild(dueDate)
-  // todoContainer.appendChild(priority)
-  // todoContainer.appendChild(note)
-  // todoContainer.appendChild(project)
+
+  //completed checkbox
+  const completedCheckBox = document.createElement('input')
+  completedCheckBox.setAttribute('type','checkbox')
+  completedCheckBox.classList.add('completed-checkbox')
+  const completed = todo.getCompleted();
+  completedCheckBox.checked = completed;
+  if (completed === true) {
+    todoContainer.classList.add('completed-todo')
+  } else {
+    todoContainer.classList.remove('completed-todo')
+  }
+  completedCheckBox.addEventListener('click', () => {
+    todo.setCompleted(completedCheckBox.checked)
+    if (completedCheckBox.checked === true) {
+      todoContainer.classList.add('completed-todo')
+    } else {
+      todoContainer.classList.remove('completed-todo')
+    }
+  })  
+  todoContainer.appendChild(completedCheckBox)
 
   //delete button
   const deleteTodoButton = document.createElement('img');
