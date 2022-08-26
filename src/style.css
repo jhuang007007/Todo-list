@@ -105,13 +105,37 @@ li {
 
 .todo-container {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: auto;
+  grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 20px 20px; 
   border-bottom: solid #f5b562 1px;
 }
 
-.todo-container > :nth-child(1) {
+.todo-container > .todo-name {
   margin-bottom: 5px;
+}
+
+.todo-container > .todo-description {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.todo-container > .todo-due-date {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.todo-container > .todo-priority {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+.todo-container > .todo-note {
+  grid-column: 5;
+  grid-row: 2;
+}
+
+.todo-container > .todo-project {
+  grid-column: 6;
+  grid-row: 2;
 }
 
 .delete-todo-button {

@@ -58,16 +58,22 @@ const renderTodo = (todo) => {
   //todo values
   const name = document.createElement('p')
   name.textContent = todoName;
+  name.classList.add('todo-name')
   const description = document.createElement('p')
   description.textContent = todo.getDescription()
+  description.classList.add('todo-description')
   const dueDate = document.createElement('p')
   dueDate.textContent = todo.getDueDate()
+  dueDate.classList.add('todo-due-date')
   const priority = document.createElement('p')
   priority.textContent = todo.getPriority()
+  priority.classList.add('todo-priority')
   const note = document.createElement('p')
   note.textContent = todo.getNote()
+  note.classList.add('todo-note')
   const project = document.createElement('p')
   project.textContent = todo.getProject()
+  project.classList.add('todo-project')
   todoContainer.appendChild(name)
 
   //completed checkbox
