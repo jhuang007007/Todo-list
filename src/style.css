@@ -6,6 +6,7 @@
 
 nav > ul{
   display: flex;
+  padding-left: 0;
 }
 
 li {
@@ -30,6 +31,16 @@ li {
   top: 25px;
   right: 25px;
   margin-left: 50px;
+  height: 20px;
+}
+
+#sidebar > #close-sidebar-button:hover {
+  cursor: pointer;
+  filter: invert(1);
+}
+
+#sidebar > #close-sidebar-button:active {
+  filter: invert(.5);
 }
 
 .project-list {
@@ -38,10 +49,6 @@ li {
   right: -25px;
   left: 0;
   margin-left: 0px;
-}
-
-#create-project {
-  width:75%;
 }
 
 #main {
@@ -105,12 +112,15 @@ li {
 
 .todo-container {
   display: grid;
-  grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 20px 20px; 
+  padding-left: 10px;
+  grid-template-columns: 30px 1fr 1fr 1fr 1fr 1fr 20px 20px; 
   border-bottom: solid #f5b562 1px;
 }
 
 .todo-container > .todo-name {
   margin-bottom: 5px;
+  align-self: center;
+  padding-top: 5px;
 }
 
 .todo-container > .todo-description {
@@ -163,4 +173,17 @@ li {
 .completed-todo {
   text-decoration: line-through;
   color: gray;
+}
+
+nav img {
+  height: 25px;
+}
+
+nav img:hover {
+  cursor: pointer;
+  filter: invert(1);
+}
+
+nav img:active {
+  filter: invert(.5);
 }
