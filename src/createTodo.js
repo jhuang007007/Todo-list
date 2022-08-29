@@ -2,6 +2,9 @@ import { filterProject } from "./createProject";
 import { loadTodoButton } from "./init";
 import { loadfromLocalStorage, saveToLocalStorage } from "./localStorageHandler";
 import { retrieveTodosFromLocalStorage, todoFactory } from "./todoFactory";
+import xlarge from "./img/x-lg.svg"
+import chevronUp from "./img/chevron-up.svg"
+import chevronDown from './img/chevron-down.svg';
 
 let todoArray = [];
 if (loadfromLocalStorage('TODO_NAMES') !== null) {
@@ -100,7 +103,7 @@ const renderTodo = (todo) => {
   //delete button
   const deleteTodoButton = document.createElement('img');
   deleteTodoButton.classList.add('delete-todo-button')
-  deleteTodoButton.src = '../src/img/x-lg.svg'
+  deleteTodoButton.src = xlarge;
   deleteTodoButton.addEventListener('click', () => {
     todoContainer.remove();
     todo.deleteTodo();
@@ -111,7 +114,7 @@ const renderTodo = (todo) => {
   //expand button
   const expandTodoButton = document.createElement('img');
   expandTodoButton.classList.add('expand-todo-button')
-  expandTodoButton.src = '../src/img/chevron-down.svg'
+  expandTodoButton.src = chevronDown;
   expandTodoButton.addEventListener('click', () => {
     todoContainer.appendChild(description)
     todoContainer.appendChild(dueDate)
@@ -128,7 +131,7 @@ const renderTodo = (todo) => {
   //collapse button
   const collapseTodoButton = document.createElement('img');
   collapseTodoButton.classList.add('collapse-todo-button')
-  collapseTodoButton.src = '../src/img/chevron-up.svg'
+  collapseTodoButton.src = chevronUp;
   collapseTodoButton.addEventListener('click', () => {
     description.remove()
     dueDate.remove()

@@ -1,8 +1,9 @@
 import { projectButtonEventHandler } from "./createProjectButton";
 import { renderTodo, todoArray } from "./createTodo";
 import { loadTodoButton, removeMainContentChildren } from "./init";
-import { loadfromLocalStorage, saveToLocalStorage } from "./localStorageHandler";
+import { saveToLocalStorage } from "./localStorageHandler";
 import { projectFactory, projectArray } from "./projectFactory";
+import xlarge from "./img/x-lg.svg"
 
 const createProject = (event) => {
   event.preventDefault();
@@ -66,7 +67,8 @@ const renderProject = (project) => {
   if (projectName !== 'General') {
     const deleteProjectButton = document.createElement('img');
     deleteProjectButton.classList.add('delete-project-button')
-    deleteProjectButton.src = '../src/img/x-lg.svg'
+    // deleteProjectButton.src = '../src/img/x-lg.svg'
+    deleteProjectButton.src = xlarge;
     deleteProjectButton.addEventListener('click', () => {
       projectContainer.remove();
       project.deleteProject();

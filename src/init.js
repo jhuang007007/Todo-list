@@ -1,6 +1,10 @@
 import { format } from "date-fns";
 import { createTodo, renderTodo, todoArray } from "./createTodo";
 import { projectArray } from "./projectFactory";
+import list from './img/list.svg';
+import house from './img/house.svg';
+import search from './img/search.svg';
+import xlarge from './img/x-lg.svg';
 
 const body = document.querySelector('body');
 
@@ -44,9 +48,9 @@ const loadHeader = () => {
   searchBarContainer.appendChild(searchBar);
   searchBarContainer.appendChild(searchBarImage);
 
-  openSideBarButton.src = '../src/img/list.svg';
-  homeButton.src = '../src/img/house.svg';
-  searchBarImage.src = '../src/img/search.svg';
+  openSideBarButton.src = list;
+  homeButton.src = house;
+  searchBarImage.src = search;
 }
 
 const loadSidebar = () => {
@@ -75,7 +79,7 @@ const loadSidebar = () => {
   const closeSideBarButton = document.createElement('img');
 
   closeSideBarButton.id = 'close-sidebar-button';
-  closeSideBarButton.src = '../src/img/x-lg.svg';
+  closeSideBarButton.src = xlarge;
 
   sidebar.appendChild(closeSideBarButton)
 }
